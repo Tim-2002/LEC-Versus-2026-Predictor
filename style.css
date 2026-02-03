@@ -138,10 +138,36 @@ input:focus {
     }
 }
 
-/* --- UTILITAIRES DE DÉFILEMENT --- */
-.touch-pan-x {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+/* --- UTILITAIRES DE DÉFILEMENT (FIX IPHONE) --- */
+.overflow-x-auto {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* Force le scroll fluide sur iOS */
+    -webkit-overflow-scrolling: touch; 
+    /* Empêche le rebond Safari qui bloque parfois le scroll horizontal */
+    overscroll-behavior-x: contain; 
+}
+
+/* On s'assure que le contenu intérieur ne bloque pas le geste */
+.inline-flex {
+    display: inline-flex !important;
+    vertical-align: top;
+}
+
+/* FIX CRITIQUE : Empêche les clics sur les cartes de bloquer le début du scroll */
+.match-card, .match-team, input {
+    touch-action: pan-x pan-y; 
+}
+
+/* Style de la barre de défilement pour qu'elle soit visible et incite au scroll */
+.overflow-x-auto::-webkit-scrollbar {
+    height: 8px;
+}
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 10px;
 }
 
 /* Animation subtile pour le nom du gagnant final */
